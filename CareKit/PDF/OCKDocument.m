@@ -53,30 +53,30 @@ static NSString *htmlStringFromString (NSString *string) {
 }
 
 - (NSString *)HTMLContent {
-    NSString *html = @"<!doctype html>\n";
+    NSString *html = @"<!doctype html>";
     
-    NSString *css = @"body {\n"
-    "font-family: -apple-system, Helvetica, Arial;\n"
-    "}\n";
+    NSString *css = @"body {"
+    "font-family: -apple-system, Helvetica, Arial;"
+    "}";
     if (css.length > 0) {
-        css = [NSString stringWithFormat:@"<style>\n"
-               "%@\n"
-               "</style>\n", css];
+        css = [NSString stringWithFormat:@"<style>"
+               "%@"
+               "</style>", css];
     }
     
     
-    html = [html stringByAppendingFormat:@"<html>\n"
-            "<head>\n"
-            "<title>%@</title>\n"
-            "<meta charset=\"utf-8\">\n"
+    html = [html stringByAppendingFormat:@"<html>"
+            "<head>"
+            "<title>%@</title>"
+            "<meta charset=\"utf-8\">"
             "%@"
-            "</head>\n"
-            "<body>\n", _title.length > 0 ? _title : @"html", css]; // To pass w3c html validation
+            "</head>"
+            "<body>", _title.length > 0 ? _title : @"html", css]; // To pass w3c html validation
     
     if (_title) {
         html = [html stringByAppendingString:[NSString stringWithFormat:@"<h2>%@</h2><div style='clear:both; width:100%%;"
                                               "background-color:#000000; height:1px; margin-top:-17px; margin-bottom:10px;'"
-                                              "></div>\n", _title]];
+                                              "></div>", _title]];
     }
     
     for (id<OCKDocumentElement> element in _elements) {
@@ -84,7 +84,7 @@ static NSString *htmlStringFromString (NSString *string) {
         html = [html stringByAppendingString:@"\n"];
     }
     
-    html = [html stringByAppendingString:@"</body>\n</html>\n"];
+    html = [html stringByAppendingString:@"</body></html>"];
     html = htmlStringFromString(html);
     return html;
 }
@@ -167,7 +167,7 @@ static NSString *htmlStringFromString (NSString *string) {
 
 static NSString *imageTagFromImage (UIImage *image) {
     NSData *imageData = UIImagePNGRepresentation(image);
-    NSString *format = @"<img style='vertical-align: middle;' alt=\"\" height='%@' width='%@' src='data:image/png;base64,%@' />\n";
+    NSString *format = @"<img style='vertical-align: middle;' alt=\"\" height='%@' width='%@' src='data:image/png;base64,%@' />";
     NSString *base64String = [imageData base64EncodedStringWithOptions:0];
     NSString *imageTag = [NSString stringWithFormat:format, @(image.size.height), @(image.size.width), base64String];
     return imageTag;
@@ -198,7 +198,7 @@ static NSString *imageTagFromView (UIView *view) {
         html = [html stringByAppendingString:@"<p>"];
         
         if (_chart.title) {
-            html = [html stringByAppendingFormat:@"<b>%@</b><br/>\n", _chart.title];
+            html = [html stringByAppendingFormat:@"<b>%@</b><br/>", _chart.title];
         }
         
         UIView *view = [_chart chartView];
@@ -217,7 +217,7 @@ static NSString *imageTagFromView (UIView *view) {
     
         
         if (_chart.text) {
-            html = [html stringByAppendingFormat:@"<i>%@</i>\n", _chart.text];
+            html = [html stringByAppendingFormat:@"<i>%@</i>", _chart.text];
         }
         
         html = [html stringByAppendingString:@"</p>"];
