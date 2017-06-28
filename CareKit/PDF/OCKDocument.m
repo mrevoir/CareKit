@@ -89,6 +89,22 @@ static NSString *htmlStringFromString (NSString *string) {
     return html;
 }
 
+- (NSString *)TextContent {
+    NSString *text = @"";
+    
+    if (_title) {
+        text = [text stringByAppendingString:_title];
+        text = [text stringByAppendingString:@"\n\n"];
+    }
+    
+    for (id<OCKDocumentElement> element in _elements) {
+        text = [text stringByAppendingString:[element TextContent]];
+        text = [text stringByAppendingString:@"\n"];
+    }
+
+    return text;
+}
+
 - (void)createPDFDataWithCompletion:(void (^)(NSData *data, NSError * _Nullable error))completion {
     if (_writer == nil) {
         _writer = [[OCKHTMLPDFWriter alloc] init];
@@ -129,6 +145,14 @@ static NSString *htmlStringFromString (NSString *string) {
     return html;
 }
 
+- (NSString *)TextContent {
+    NSString *text = @"";
+    if (_subtitle) {
+        text = [text stringByAppendingString: _subtitle];
+    }
+    return text;
+}
+
 - (instancetype)copyWithZone:(NSZone *)zone {
     OCKDocumentElementSubtitle *element = [[[self class] allocWithZone:zone] init];
     element->_subtitle = [_subtitle copy];
@@ -154,6 +178,14 @@ static NSString *htmlStringFromString (NSString *string) {
         html = [html stringByAppendingString:[NSString stringWithFormat:@"<p>%@</p>", _content]];
     }
     return html;
+}
+
+- (NSString *)TextContent {
+    NSString *text = @"";
+    if (_content) {
+        text = [text stringByAppendingString:_content];
+    }
+    return text;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {

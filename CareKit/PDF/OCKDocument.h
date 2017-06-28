@@ -46,6 +46,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, copy, readonly) NSString *HTMLContent;
 
+/**
+ Content in text format.
+ */
+@property (nonatomic, copy, readonly) NSString *TextContent;
+
 @end
 
 
@@ -87,6 +92,11 @@ OCK_CLASS_AVAILABLE
  Document content in HTML format.
  */
 @property (nonatomic, copy, readonly) NSString *HTMLContent;
+
+/**
+ Content in text format.
+ */
+@property (nonatomic, copy, readonly) NSString *TextContent;
 
 /**
  Create PDF file using data from the current document object.
